@@ -1,0 +1,18 @@
+body {
+    font-family: sans-serif;
+}
+main {
+    width: 550px;
+    margin: 0 auto;
+    padding: 1em;
+    text-align: center; 
+}
+.flex-container {
+    display: flex;
+    text-align: center;
+    padding:  0 50px 0 50px;
+   
+}
+p {
+    padding: 20px;
+}
