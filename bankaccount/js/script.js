@@ -13,7 +13,8 @@ const bankAccount = function(ownerName) {
     let owner = ownerName
     let balance = 1000
     return {
-      getOwnerName: function(owner) {
+      getOwnerName: function() {
+        let me = this
         return owner
       },
       getBalance: function() {
@@ -21,31 +22,32 @@ const bankAccount = function(ownerName) {
         return balance;
       },
       deposit: function(depositAmount) {
-        
-        balance += depositAmount
+        let me = this
+        me.balance += depositAmount
+       console.log(depositAmount)
        
-        return balance;
+        return depositAmount
       },
-      withdrawal: function(withdrawalAmount) {
-        if (withdrawalAmount > balance) {
+      withdrawal: function() {
+        let me = this
+        if (me.withdrawalAmount > me.balance) {
           alert('you do not have sufficient funds for this withdrawal')
-        } else { balance -= withdrawalAmount}
+        } else { me.balance -= me.withdrawalAmount}
        
         return balance
       },
-      handleOwnerName: function(owner) {
+      handleOwnerName: function() {
         let me = this
-        return me.owner
+        return this
         
       },
       handleDeposit: function() {
         let me = this
-        return function () {
+        return function (depositAmount) {
           depositAmount = parseInt(prompt('Enter deposit amount:'))
-          
+          console.log(depositAmount)
           if (depositAmount) {
             me.deposit(depositAmount)
-            console.log(`after deposit ${depositAmount} balance is ${balance}`)
             
           }
         }
@@ -56,7 +58,7 @@ const bankAccount = function(ownerName) {
           withdrawalAmount = parseInt(prompt('Enter withdrawal amount:'))
           if (withdrawalAmount) {
             me.withdrawal(withdrawalAmount)
-            
+           
           }
         }
       },
@@ -70,7 +72,7 @@ const bankAccount = function(ownerName) {
 window.addEventListener('load', () => {
 
   //get customer name
-  $('name').onclick = customerAccount.handleOwnerName()
+  $('name').onclick = customerAccount.getOwnerName()
   //collect deposit
   $('deposit').onclick = customerAccount.handleDeposit()
   //make withdrawal
@@ -79,7 +81,7 @@ window.addEventListener('load', () => {
 })
 
   const accountOwner = document.createElement('p')
-  accountOwner.innerText = `Account information for ${customerAccount.handleOwnerName()}:`
+  accountOwner.innerText = `Account information for ${customerAccount.getOwnerName()}:`
   $('accountActivity').appendChild(accountOwner)
   
   const currentBalance = document.createElement('p')
