@@ -23,10 +23,10 @@ const bankAccount = function(ownerName) {
       },
       deposit: function(depositAmount) {
         let me = this
-        me.balance += depositAmount
+        me.balance += me.depositAmount
        console.log(depositAmount)
        
-        return depositAmount
+        return balance
       },
       withdrawal: function() {
         let me = this
